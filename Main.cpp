@@ -38,7 +38,7 @@ public:
 		int type,x,y;
 	};
 	vector<ChessToVec> AllChess;
-	bool ChooseVision = true;
+	bool ChooseVision = false;
 	int Cv = 1;
 	void _GetKey(bool &Keyflag/*To judge if 'c' is pushed*/,bool &IfKey/*To judge if _kbhit()*/){
 		if(_kbhit()){
@@ -195,19 +195,20 @@ public:
 private:
 };
 ComputerPlayer ComP;
-void EndOfGame(){
-	if(Judgement.IfWinner == 1){
-		system("cls");
-		cb.PrintChessBoard();
-		printf("Black Wins!");
-	}else{
-		system("cls");
-		cb.PrintChessBoard();
-		printf("White Wins!");
-	}
-}
+void Init();
+void MainGame();
+void EndOfGame();
+
+//Main
 int main(){
-	scanf("%d", &cb.SizeOf);
+	Init();
+	MainGame();
+	EndOfGame();
+	return 0;
+}
+
+
+void MainGame(){
 	while(Judgement.flag){
 		int StepOf = cb.Step;
 		bool Keyflag = false;
@@ -246,6 +247,18 @@ int main(){
 		}
 		cb.Step++;     
 	}
-	EndOfGame();
-	return 0;
+}
+void EndOfGame(){
+	if(Judgement.IfWinner == 1){
+		system("cls");
+		cb.PrintChessBoard();
+		printf("Black Wins!");
+	}else{
+		system("cls");
+		cb.PrintChessBoard();
+		printf("White Wins!");
+	}
+}
+void Init(){
+	scanf("%d", &cb.SizeOf);
 }
